@@ -1,0 +1,27 @@
+{
+    "id": "7B54FCAA",
+    "path": "~/ProjectsR/taqtile_data/app/server.R",
+    "project_path": "app/server.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1684771008735.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "144,41",
+        "scrollLine": "128"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1684710758,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1684710758,
+    "read_only": false,
+    "read_only_alternatives": []
+}
