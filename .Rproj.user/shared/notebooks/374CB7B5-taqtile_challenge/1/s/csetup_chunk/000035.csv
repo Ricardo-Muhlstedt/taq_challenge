@@ -1,4 +1,0 @@
-"0","raw_data <- read_xlsx(data)
-"
-"2","Error: `path` does not exist: ‘data//input//dados_vendas.xlsx’
-"
