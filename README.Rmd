@@ -1,0 +1,29 @@
+---
+title: "Taqtile Challenge"
+author: "Ricardo Mühlstedt"
+date: "2023-05-19"
+output: github_document
+---
+
+Análise reproduzível de dados desenvolvida para o processo seletivo do *Instituto Taqtile*
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Obejtivos
+Responder todas as perguntas apresentadas e criar um _dashboard_ contendo as respostas de tais perguntas.
+
+## Dependências
+* `r R.version.string`
+  * `tidyverse` (v. `r packageVersion("tidyverse")`) 
+  * `readxl` (v. `r packageVersion("readxl")`)
+  * `rmarkdown` (v. `r packageVersion("rmarkdown")`)
+  * `shiny` (v. `r packageVersion("shiny")`)
+  * `dygraphs` (v. `r packageVersion("dygraphs")`)
+  * `xts` (v. `r packageVersion("xts")`)
+
+
+## Informações do sistema
+
+```{r, echo=FALSE}
+sessionInfo()
+```

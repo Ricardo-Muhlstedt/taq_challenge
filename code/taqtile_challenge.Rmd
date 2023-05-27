@@ -2,7 +2,7 @@
 title: "Taqtile Challenge"
 author: "Ricardo Mühlstedt"
 date: "2023-05-19"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}

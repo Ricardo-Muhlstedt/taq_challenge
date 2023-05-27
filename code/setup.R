@@ -2,9 +2,8 @@
 library(tidyverse)
 library(readxl)
 
-
 ## Loading data from excel file
-data <- "data//input//dados_vendas.xlsx"
+data <- "C://Users//PC//Documents//ProjectsR//taqtile_data//data//input//dados_vendas.xlsx"
 
 raw_data <- read_xlsx(data)
 

@@ -106,16 +106,34 @@ raw_data %>%
   ggplot() +
   geom_point(aes(Price, Quantity))
 
+
 raw_data %>%
   ggplot() +
   geom_hex(aes(Price, Quantity)) 
 
 
 ## Subsetting negative and abnormal pricing and quantities
-raw_data   %>%
+raw_data %>%
+  mutate(total_sale = Price * Quantity) %>%
   filter(Price < 0 | Price > 300 | Quantity > 2000 | Quantity < -2000) %>%
-  select(`Customer ID`, everything(), -Invoice, -Country)
+  select(`Customer ID`, everything(), -Invoice, -Country) %>%
+  nrow()
 
+## Z score
+zscore <- function(x) {
+  (x - mean(x)) / sd(x)
+}
+
+raw_data %>%
+  mutate(total_sale = Price * Quantity) %>%
+  mutate(z_sale = zscore(total_sale),
+         z_price = zscore(Price),
+         z_quantity = zscore(Quantity)) %>%
+  filter(z_sale > 3 | z_sale < -3 |
+         z_price > 3 | z_price < -3 |
+         z_quantity > 3 | z_quantity < -3) %>%
+  ggplot() +
+  geom_hex(aes(Price, Quantity))
 
 # Distribution of total spent per customer
 gross_revenue %>%
@@ -153,8 +171,10 @@ gross_revenue %>%
  # Favorite day of the week and time
  gross_revenue %>%
    mutate(day = wday(InvoiceDate, label = TRUE)) %>%
-   group_by(day) %>%
-   count(day)
+   group_by(Invoice, day) %>%
+   distinct(Invoice) %>%
+   ungroup() %>%
+   
  
  gross_revenue %>%
    mutate(InvoiceDate = format(InvoiceDate, format = "%H")) %>%
