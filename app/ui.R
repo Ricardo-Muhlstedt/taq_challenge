@@ -24,19 +24,27 @@ ui <- fluidPage(
                                plotOutput("country_sales",
                                           height = "290px")),
                         column(6,
-                               plotOutput("sales_year",
+                               plotlyOutput("sales_year",
                                           height = "290px"))
                ),
                fluidRow(br()
                         ),
                fluidRow(column(6,
-                               plotOutput("season_sales")),
+                               tabsetPanel(type = "tabs",
+                                 tabPanel("Monthly", 
+                                          plotlyOutput("season_sales_month")),
+                                 tabPanel("Quarterly",
+                                          plotlyOutput("season_sales_quarter")),
+                                 tabPanel("Semesterly",
+                                          plotlyOutput("season_sales_semester"))
+                                )
+                               ),
                         column(6,
-                               plotOutput("best_selling"))),
+                               plotlyOutput("best_selling"))),
                fluidRow(br()
                         ),
                fluidRow(column(6,
-                               plotOutput("mean_invoice",
+                               plotlyOutput("mean_invoice",
                                           height = "290px")),
                         column(4,
                                numericInput("bins",
@@ -47,8 +55,8 @@ ui <- fluidPage(
                                            label = "Range",
                                            value = c(0, 100),
                                            min = 0,
-                                           max = 250),
-                               offset = 2),
+                                           max = 250)
+                               ),
                         ),
                fluidRow(br()
                ),

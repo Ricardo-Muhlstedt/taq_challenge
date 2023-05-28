@@ -36,6 +36,8 @@ gross_revenue %>%
 
 
 # Seasonal sales
+
+## Monthly
 gross_revenue %>%
   filter(!grepl("^2009-.", InvoiceDate)) %>%
   mutate(month = month(InvoiceDate, label = TRUE)) %>%
@@ -55,6 +57,58 @@ gross_revenue %>%
        y = "Count")+
   theme(text = element_text(size = 20),
         plot.title = element_text(hjust = -0.13),
+        axis.title = element_text(color = "#4a4a4a"))
+
+## Quarterly
+gross_revenue %>%
+  filter(!grepl("^2009-.", InvoiceDate)) %>%
+  mutate(quarter = as.factor(quarter(InvoiceDate))) %>%
+  group_by(quarter) %>%
+  count() %>%
+  ungroup() %>%
+  mutate(quarter = fct_reorder(quarter, n)) %>%
+  ggplot() +
+  geom_histogram(aes(quarter, n),
+                 stat = "identity",
+                 fill = "#4682B4",
+                 orientation = "horizontal") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Quarterly sales",
+       subtitle = "A sum of all sales made by quarter",
+       x = "",
+       y = "Count")+
+  theme(text = element_text(size = 20),
+        plot.title = element_text(hjust = -0.06),
+        plot.subtitle = element_text(size = 18,
+                                     color = "#4a4a4a",
+                                     hjust = -0.08),
+        axis.title = element_text(color = "#4a4a4a"))
+
+## Semesterly
+gross_revenue %>%
+  filter(!grepl("^2009-.", InvoiceDate)) %>%
+  mutate(semester = as.factor(semester(InvoiceDate))) %>%
+  group_by(semester) %>%
+  count() %>%
+  ungroup() %>%
+  mutate(semester = fct_reorder(semester, n)) %>%
+  ggplot() +
+  geom_histogram(aes(semester, n),
+                 stat = "identity",
+                 fill = "#4682B4",
+                 orientation = "horizontal") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Quarterly sales",
+       subtitle = "A sum of all sales made by semester",
+       x = "",
+       y = "Count")+
+  theme(text = element_text(size = 20),
+        plot.title = element_text(hjust = -0.06),
+        plot.subtitle = element_text(size = 18,
+                                     color = "#4a4a4a",
+                                     hjust = -0.08),
         axis.title = element_text(color = "#4a4a4a"))
 
 # Mean per invoice

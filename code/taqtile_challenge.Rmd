@@ -170,8 +170,8 @@ gross_revenue %>%
   mutate(InvoiceDate = format(ymd_hms(InvoiceDate),
                               format = "%Y-%m-%d")) %>%
   group_by(InvoiceDate) %>%
-  summarise(count = sum(Quantity * Price)) %>%
-  arrange(desc(count)) %>%
+  summarise(sales = sum(Quantity * Price)) %>%
+  arrange(desc(sales)) %>%
   head(1) %>%
   knitr::kable()
 ```
@@ -214,6 +214,25 @@ Existem diversas observações fora da normalidade. Valores fora do comum, descr
 raw_data %>%
   ggplot() +
   geom_point(aes(Price, Quantity))
+```
+
+
+Utilizando o método estatístico _"standard scores"_ para encontrar as _"outliers"_, considerando um intervalo de ± 3, é possível encontrar o número de observações que seriam consideradas fora do comum.
+```{r}
+zscore <- function(x) {
+  (x - mean(x)) / sd(x)
+}
+
+raw_data %>%
+  mutate(total_sale = Price * Quantity) %>%
+  mutate(z_sale = zscore(total_sale),
+         z_price = zscore(Price),
+         z_quantity = zscore(Quantity)) %>%
+  filter(z_sale > 3 | z_sale < -3 |
+         z_price > 3 | z_price < -3 |
+         z_quantity > 3 | z_quantity < -3) %>%
+  nrow() %>%
+  knitr::kable()
 ```
 
 A maior parte dos dados estão localizados no centro do gráfico, tornando as outras observações _"Outliers"_. Porém, existem dados que não fazem parte do grupo geral, mas não apresentam motivo para serem desqualificados como uma venda valida.
