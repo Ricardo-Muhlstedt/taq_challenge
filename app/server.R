@@ -159,7 +159,7 @@ server <- function(input, output) {
                          breaks = seq(0, 500, 15)) +
       theme_minimal() +
       labs(title = "Mean value spent per invoice",
-           x = "Mean spent (?)",
+           x = "Mean spent (£)",
            y = "Count") +
       theme(text = element_text(size = 20),
             plot.title = element_text(hjust = -0.1),
