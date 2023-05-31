@@ -46,7 +46,7 @@ server <- function(input, output) {
       theme_minimal() +
       labs(title = "Yearly sales",
            subtitle = "From 01/12/2009 to 09/12/2010",
-           y = "Total sales",
+           y = "Total sales (£)",
            x = "") +
       theme(text = element_text(size = 20),
             plot.title = element_text(hjust = -0.1),
@@ -131,7 +131,7 @@ server <- function(input, output) {
                      orientation = "horizontal") +
       coord_flip() +
       theme_minimal() +
-      labs(title = "Quarterly sales",
+      labs(title = "Semesterly sales",
            subtitle = "A sum of all sales made by semester",
            x = "",
            y = "Count")+
@@ -159,7 +159,7 @@ server <- function(input, output) {
                          breaks = seq(0, 500, 15)) +
       theme_minimal() +
       labs(title = "Mean value spent per invoice",
-           x = "Mean spent",
+           x = "Mean spent (?)",
            y = "Count") +
       theme(text = element_text(size = 20),
             plot.title = element_text(hjust = -0.1),

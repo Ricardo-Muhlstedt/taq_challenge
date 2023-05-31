@@ -1,6 +1,7 @@
 library(tidyverse)
 library(treemapify)
 library(dygraphs)
+library(plotly)
 
 uci <- a("UCI Machine Learning Repository",
          href = "https://archive.ics.uci.edu/ml/datasets/Online+Retail+II")

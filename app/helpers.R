@@ -2,6 +2,7 @@ library(tidyverse)
 library(readxl)
 library(dygraphs)
 library(xts)
+library(plotly)
 
 
 data <- "dados_vendas.xlsx"

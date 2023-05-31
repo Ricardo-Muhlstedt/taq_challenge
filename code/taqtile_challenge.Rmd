@@ -68,8 +68,11 @@ raw_data %>%
   filter(!grepl("^[A-Za-z]", StockCode)) %>%
   filter(Price == max(Price)) %>%
   select(Description, Price) %>%
+  mutate(Price = paste("£", format(Price,
+                        Digits = 2,
+                        nsmall = 2))) %>%
   knitr::kable()
-```
+ ```
 
 ## Perguntas
 
@@ -119,7 +122,11 @@ gross_revenue %>%
          grepl("^[A-Z0-9]", Description) | is.na(Description)) %>%
   mutate(sale = Quantity * Price) %>%
   filter(!is.na(sale)) %>%
-  summarise(faturamento_bruto = format(sum(sale), nsmall = 2)) %>%
+  summarise(faturamento_bruto = paste("£",
+                                      format(sum(sale),
+                                                  nsmall = 2,
+                                                  format = "f",
+                                             big.mark = ","))) %>%
   knitr::kable()
 ```
 
@@ -172,6 +179,10 @@ gross_revenue %>%
   group_by(InvoiceDate) %>%
   summarise(sales = sum(Quantity * Price)) %>%
   arrange(desc(sales)) %>%
+  mutate(sales = paste("£", format(sales,
+                                   big.mark = ",",
+                                   nsmall = 2, 
+                                   format = "f"))) %>%
   head(1) %>%
   knitr::kable()
 ```
@@ -186,10 +197,12 @@ gross_revenue %>%
   select(Description, Price) %>%
   distinct() %>%
   ungroup() %>%
-  summarise(mean_price = format(mean(Price), nsmall = 2)) %>%
+  summarise(mean_price = paste("£", format(mean(Price),
+                                           nsmall = 2,
+                                           digits = 2,
+                                format = "f"))) %>%
   knitr::kable()
 ```
-
 
 ### Quantos usuários compraram canecas em 2010?
 Foi considerado traduções da palavra "Caneca", como _"Stein"_ ou _"Tankard"_, porém apenas _"Mug"_ retornou resultados.
@@ -261,7 +274,7 @@ gross_revenue %>%
   scale_x_continuous(breaks = seq(0, 500, 25), 
                      lim = c(0 , 500)) +
    theme_minimal() +
-  labs(x = "Total spent per customer",
+  labs(x = "Total spent per customer (£)",
        y = "Count")
 ```
 
@@ -279,7 +292,7 @@ gross_revenue %>%
    scale_x_continuous(breaks = seq(0, 100, 10), 
                       lim = c(0 , 100)) +
    theme_minimal() +
-  labs(x = "Mean spent",
+  labs(x = "Mean spent (£)",
        y = "Count")
 ```
 
